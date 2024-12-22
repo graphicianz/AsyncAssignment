@@ -1,7 +1,7 @@
 import sys
 import time
 from PySide2 import QtWidgets, QtCore
-import async_assignment
+import async_assignment as aa
 
 class MyWindow(QtWidgets.QWidget):
     def __init__(self):
@@ -16,9 +16,16 @@ class MyWindow(QtWidgets.QWidget):
         layout = QtWidgets.QVBoxLayout()
 
         # Button
-        self.button = QtWidgets.QPushButton("Start Working")
+        self.button = QtWidgets.QPushButton("Start Working Normal")
         self.button.clicked.connect(self.on_button_click)
+
+        self.button2 = QtWidgets.QPushButton("Start Working Async")
+        self.async_assignment = aa.async_assignment( working=self.working,
+                                                     callback = self.on_work_done)
+        self.button2.clicked.connect(self.async_assignment.start_async)
+
         layout.addWidget(self.button)
+        layout.addWidget(self.button2)
 
         self.setLayout(layout)
 
