@@ -1,5 +1,3 @@
-### `README.md` for `async_assignment`
-
 ## `async_assignment`
 
 The `async_assignment` module simplifies asynchronous task execution in PySide2 applications by offloading long-running tasks to a separate thread while keeping the main UI responsive.
