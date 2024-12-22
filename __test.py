@@ -6,6 +6,7 @@ import async_assignment as aa
 class MyWindow(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
+        self.result = ''
         self.init_ui()
 
     def init_ui(self):
@@ -24,6 +25,8 @@ class MyWindow(QtWidgets.QWidget):
                                                      callback = self.on_work_done)
         self.button2.clicked.connect(self.async_assignment.start_async)
 
+        self.textbox = QtWidgets.QLineEdit()
+        layout.addWidget(self.textbox)
         layout.addWidget(self.button)
         layout.addWidget(self.button2)
 
@@ -39,11 +42,12 @@ class MyWindow(QtWidgets.QWidget):
     def working(self):
         result = sum(range(1, 1001))  # Add numbers from 1 to 1000
         time.sleep(3)  # Simulate long task
+        self.result = result
         print(f"Sum result: {result}")
 
     def on_work_done(self):
         self.button.setEnabled(True)  # Re-enable button
-        QtWidgets.QMessageBox.information(self, "Info", "Done")
+        self.textbox.setText(str(self.result))
 
 
 if __name__ == "__main__":
